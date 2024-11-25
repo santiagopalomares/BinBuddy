@@ -1,18 +1,19 @@
 #include <Arduino.h>
+#include <Servo.h>
 
-// put function declarations here:
-int myFunction(int, int);
+const int BAUD_RATE = 9600;
+const int SERVO_PIN = 17;
+Servo platform;
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  Serial.begin(BAUD_RATE);
+  platform.attach(SERVO_PIN);
+  Serial.println("starting");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  platform.write(0);
+  delay(1000)
+  platform.write(179);
+  delay(1000);
 }
