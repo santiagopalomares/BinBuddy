@@ -13,7 +13,7 @@ void setup() {
 
 void loop() {
   platform.write(0);
-  delay(1000)
+  delay(1000);
   platform.write(179);
   delay(1000);
 }
