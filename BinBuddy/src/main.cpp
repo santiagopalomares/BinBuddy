@@ -8,15 +8,29 @@ Servo platform;
 void setup() {
   Serial.begin(BAUD_RATE);
   platform.attach(SERVO_PIN);
-  Serial.println("starting");
+  Serial.println("Servo control ready. Enter 'R' to turn right, 'L' to turn left.");
 }
 
 void loop() {
-  platform.write(0);
-  delay(1000);
-  platform.write(179);
-  delay(1000);
+  if (Serial.available() > 0) {
+    char command = Serial.read();
+    command = toupper(command);
+    if (command == 'R') {
+      Serial.println("Turning right");
+      platform.write(170);
+    } else if (command == 'L') {
+      Serial.println("Turning left");
+      platform.write(40);
+    } else if (command =='C'){
+      Serial.println("Center");
+      platform.write(105);
+    } else {
+      Serial.println("Invalid command. Use 'R' or 'L'.");
+    }
+  }
 }
+
+
 
 
 // #include <Arduino.h>
